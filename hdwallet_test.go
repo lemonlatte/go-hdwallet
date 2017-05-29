@@ -156,7 +156,7 @@ func TestSerialize(t *testing.T) {
 // Public key: 04CBCAA9C98C877A26977D00825C956A238E8DDDFBD322CCE4F74B0B5BD6ACE4A77BD3305D363C26F82C1E41C667E4B3561C06C60A2104D2B548E6DD059056AA51
 // Expected address: 1AEg9dFEw29kMgaN4BNHALu7AzX5XUfzSU
 func TestAddress(t *testing.T) {
-	addr, err := StringAddress(m_pub2)
+	addr, err := StringAddress(m_pub2, BTC)
 	if err != nil {
 		t.Errorf("%s should have been nil", err.Error())
 	}
@@ -200,7 +200,7 @@ func BenchmarkStringPubString(b *testing.B) {
 
 func BenchmarkStringAddress(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		StringAddress(m_pub2)
+		StringAddress(m_pub2, BTC)
 	}
 }
 
