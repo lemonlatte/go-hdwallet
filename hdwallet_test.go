@@ -47,7 +47,7 @@ func testChild(t *testing.T, key, ref_key string, i uint32) {
 }
 
 func testMasterKey(t *testing.T, seed []byte, ref_key string) {
-	masterprv := MasterKey(seed).String()
+	masterprv := MasterKey(seed, false).String()
 	if masterprv != ref_key {
 		t.Errorf("\n%s\nsupposed to be\n%s", masterprv, ref_key)
 	}

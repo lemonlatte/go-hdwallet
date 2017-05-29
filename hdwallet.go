@@ -172,7 +172,7 @@ func GenSeed(length int) ([]byte, error) {
 }
 
 // MasterKey returns a new wallet given a random seed.
-func MasterKey(seed []byte) *HDWallet {
+func MasterKey(seed []byte, test bool) *HDWallet {
 	key := []byte("Bitcoin seed")
 	mac := hmac.New(sha512.New, key)
 	mac.Write(seed)
@@ -183,6 +183,9 @@ func MasterKey(seed []byte) *HDWallet {
 	i := make([]byte, 4)
 	fingerprint := make([]byte, 4)
 	zero := make([]byte, 1)
+	if test {
+		return &HDWallet{TestPrivate, uint16(depth), fingerprint, i, chain_code, append(zero, secret...)}
+	}
 	return &HDWallet{Private, uint16(depth), fingerprint, i, chain_code, append(zero, secret...)}
 }
 
